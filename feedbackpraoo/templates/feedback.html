@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title> FEED BACK FORM </title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+    b{
+        font-size: 30px;
+        color: red;
+        font-family: cursive;
+    }
+    body{
+        background-color: aqua;
+    }
+
+</style>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <h1> Enter Feed backs below here</h1>
+            {% if feedbacks %}
+            {% for i in feedbacks %}
+            {% if i.rating >= 5 and i.rating <= 10 %}
+            <b>Name:{{ i.name|capfirst }}</b><br>
+            rating:{{ i.rating }}<br>
+            date:{{ i.date }}<br>
+            feedback:{{ i.feedback }}<br>
+            {% endif %}
+        {% endfor %}
+        {% else %}
+        <h1> No feedbacks are vailable</h1>
+        {% endif %}
+        <h3 class="text-center">Plaese Enter Your Feedback</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ abcd }}
+            <center>
+                <input type="submit" value="send" class="btn btn-danger">
+                <input type="reset" value="clear" class="btn btn-success">
+            </center>
+        </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
